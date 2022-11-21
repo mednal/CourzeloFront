@@ -1,0 +1,166 @@
+<div class="section-title mt-50">
+    <h3>Candidate applications</h3>
+   </div> <!-- section title -->  
+
+
+
+   <app-slide [activePane]="isLeftVisible ? 'left' : 'right'">
+    <div leftPane>
+
+   <div class="search-bar col-lg-8 col-md-6 col-sm-4 col-xs-1">
+    <mat-form-field >
+       <input matInput  (keyup)="doFilter($any($event.target).value)" type="text" placeholder="Search">
+       <button mat-icon-button matSuffix><mat-icon>search</mat-icon></button>
+    </mat-form-field>
+</div>
+
+
+
+<table id="preloader" mat-table [dataSource]="dataSource"  matSort (matSortChange)="SortChange($event)" class="mat-elevation-z9"  >
+    
+    <ng-container matColumnDef="applicationDate" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header > Date </th>
+      <td mat-cell *matCellDef="let candidateApps"> 
+        <span *ngIf="candidateApps.applicationDate!=null"> {{candidateApps.applicationDate | date:'yyyy-MM-dd' }}</span>
+        <span *ngIf="candidateApps.applicationDate==null">----</span>  
+      </td>
+    </ng-container>
+
+
+    <ng-container  matColumnDef="candidateState" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header > Current State </th>
+      <td mat-cell *matCellDef="let candidateApps"> 
+        <span *ngIf="candidateApps.currentState!=null" > {{candidateApps.currentState.label}}</span>
+        <span *ngIf="candidateApps.currentState===null || candidateApps.currentState==[]||candidateApps.currentState===undefined" > ---</span>
+      </td>
+    </ng-container>
+
+
+    <ng-container  matColumnDef="Job" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header > Job </th>
+      <td mat-cell *matCellDef="let candidateApps"  > 
+        <span *ngIf="candidateApps.job!=null" > {{candidateApps.job.title}}</span>
+        <span *ngIf="candidateApps.job===null ||candidateApps.job===undefined" > ---</span>
+         </td>
+    </ng-container>
+
+    <ng-container  matColumnDef="interview" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >  </th>
+      <td mat-cell *matCellDef="let candidateApps"  > 
+        <div *ngIf="candidateApps.currentState">
+          <span *ngIf="candidateApps.currentState.label=='interview'" >
+             <b>Upcoming interview :</b> {{candidateApps.currentState.interviewDate | date:'short'}} 
+             <b>Link : </b><a class="link" matTooltip="Click to enter the meet"  (click)="OpenMeet(candidateApps.currentState.linkMeet)">{{candidateApps.currentState.linkMeet}} </a>
+          </span>
+          <div  *ngIf="candidateApps.currentState.label=='Job offer' " >
+           <a class="link" matTooltip="Click to view the offer in pdf" (click)="LoadPdf(candidateApps.currentState)">View official job offer</a>
+           <button matTooltip="Accept official offer" class="accept-btn" mat-icon-button (click)="AcceptOffer(candidateApps)">
+            <mat-icon>check_circle</mat-icon>
+          </button>
+          <button matTooltip="refuse official offer" class="refuse-btn" mat-icon-button (click)="RefuseOffer(candidateApps)">
+            <mat-icon>cancel</mat-icon>
+          </button>
+
+           </div> 
+
+           <div *ngIf="candidateApps.currentState.label=='pre-selected' ">
+
+            <a class="link" matTooltip="Click to view the job request" (click)="Details(candidateApps.idJob); isLeftVisible = !isLeftVisible" >View job request details</a>
+            <button matTooltip="Accept job request" class="accept-btn" mat-icon-button (click)="AcceptRequest(candidateApps)">
+             <mat-icon>check_circle</mat-icon>
+           </button>
+           <button matTooltip="refuse job request" class="refuse-btn" mat-icon-button (click)="RefuseRequest(candidateApps)">
+             <mat-icon>cancel</mat-icon>
+           </button>
+
+           </div>
+        </div>
+        
+
+         </td>
+    </ng-container>
+
+   
+
+      
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+
+</table>
+
+<mat-paginator   [pageSize]="5" [pageSizeOptions]="[3,10,25,50]"></mat-paginator>
+
+
+</div>
+<div rightPane> 
+
+  <div>
+    <button class="details-btn" (click)="isLeftVisible = !isLeftVisible">back  </button>
+</div>
+<div *ngIf="currentJob && currentJob.business" class="row" >
+  <div class="col-lg-7 col-md-6 col-sm-12">
+    <div class="job-singel-left mt-30">
+        <div class="title">
+            <h3>{{currentJob.title}}</h3>
+        </div> <!-- title -->
+        <div class="job-terms">
+            <ul>
+                <li>
+                    <div class="company-name">
+                        <div class="thum">
+                            <img src="../../../../assets/CourzeloBusiness/images/a.jpg" alt="logo">
+                        </div>
+                        <div class="name">
+                            <span>Business</span>
+                            <h6>{{currentJob.business.companyName}}</h6>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="details-section">
+                        <span>Responsable</span>
+                        <h6>{{currentJob.business.firstName}} {{currentJob.business.lastName}} </h6>
+                    </div>
+                </li>
+                <li>
+                    <div class="details-section">
+                        <span>Posted on</span>
+                        <h6>{{currentJob.creationDate | date:'yyyy-MM-dd'}} </h6>
+                    </div>
+                </li>
+            </ul>
+        </div> <!-- course terms -->
+        <div class="descrip-title">
+            <h4>Description </h4> {{currentJob.description}}
+        </div>
+    </div>
+  </div>
+
+  <div class="col-lg-5  col-md-6  col-sm-12 ">
+    <div class="row job-singel-right">
+        <div class="col-lg-12 col-md-12 col-sm-12 ">
+            <div class="job-features mt-30">
+               <h4>Job offer Features </h4>
+                <ul>
+                    <li><i class="fa fa-industry"></i>Industry : <span>{{currentJob.industry}}</span></li>
+                    <li><i class="fa fa-clone"></i>Job Type : <span>{{currentJob.jobType}}</span></li>
+                    <li><i class="fa fa-calendar-o"></i>Schedule type :  <span>{{currentJob.ScheduleType}}</span></li>
+                    <li ><i class="fa fa-compass"></i>LocationType :  <span>{{currentJob.locationType}}</span></li>
+                    <li *ngIf="currentJob.locationType!='remote'"><i class="fa fa-map-marker"></i>Location :  <span>{{currentJob.location}}</span></li>
+                </ul>
+            </div> <!-- course features -->
+        </div>
+        <div class="apply-btn">
+          
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+</div>
+
+
+</app-slide>
+

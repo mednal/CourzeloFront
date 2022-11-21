@@ -1,0 +1,76 @@
+
+<app-header></app-header>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<section class="followers">
+      <div class="container">
+       <div class="row">
+       
+	    <div class="col-lg-8 col-lg-offset-2">
+		
+         <div class="followers-box full-width">
+			<div class="followers-list" >
+			
+				<div class="followers-body" *ngFor="let user of users;let index = index" >
+				 <img class="img-responsive img-circle" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+				 <div class="name-box">
+				  <h4><a href="/userProfile/{{user.id}}" style="color: grey;">{{user.displayName}}</a></h4>
+				  <!-- <a>{{user.id}} </a> -->
+				  <span></span>
+				  <div class="followers-base">
+                   <ul class="list-group">
+                    <li class="list-group-item full-width">
+					 <div class="pull-left" style="margin-right: 20px;">
+					  <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="img-circle max-w-40 ">
+					  <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="img-circle max-w-40 ">
+					  <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" class="img-circle max-w-40 ">
+					  <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" class="img-circle max-w-40 ">
+					  <button class="btn btn-add-gray">
+					   <i class="fa fa-plus"></i>
+					  </button>
+					  <span> {{user.followers.length}} Followers</span>
+					 </div><!--/ pull-left -->
+					</li> 
+                    <li class="list-group-item full-width">
+					 <div class="pull-left">
+					  <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="" class="img-circle max-w-40 ">
+					  <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" class="img-circle max-w-40 ">
+					  <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="img-circle max-w-40 ">
+					  <img src="https://bootdey.com/img/Content/avatar/avatar8.png" alt="" class="img-circle max-w-40 ">
+					  <button class="btn btn-add-gray">
+					   <i class="fa fa-plus"></i>
+					  </button>
+					  <span> {{user.following.length}} Following </span>
+					 </div><!--/ pull-right -->
+                    </li><!--/ list-group-item -->					   
+                   </ul>
+				  </div><!--/ followers-base -->
+			     </div><!--/ name-box -->
+				 
+	
+				 
+				 <div *ngIf="checkisFollowed(user.id)==false">
+					<span><a (click)="FollowUser(user.id)" class="btn btn-info btn-sm"> follow</a></span>	
+				 </div>
+				 <div *ngIf="checkisFollowed(user.id)==true">
+					<span><a (click)="UnFollowUser(user.id)" class="btn btn-info btn-sm"> unfollow</a></span>	
+				 </div>
+				</div><!--/ followers-body -->
+			
+				<!-- <ng-container *ngIf="user.followers.container(currentUserId) === true">
+					<span><a class="btn btn-info btn-sm"> Unfollow</a></span>
+				 </ng-container>
+				 <ng-container *ngIf="user.followers.values.container(currentUserId) === false">
+					<span><a  (click)="FollowUser(user.id)"  class="btn btn-info btn-sm"> Follow</a></span>
+				 </ng-container> -->
+				
+				
+			</div><!--suggestions-list end-->
+		</div>	
+		
+		</div>
+		
+       </div><!--/ row-->	
+	  </div><!--/ container -->
+	 </section>
+
+    <app-footer></app-footer>

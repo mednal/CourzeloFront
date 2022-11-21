@@ -1,0 +1,309 @@
+
+
+@import "src/styles";
+
+
+/* HEADER SECTION */
+
+
+/*BODY SECTION */
+
+.home__body {
+
+
+  //BODY SIDEBAR
+
+
+
+  // BODY CONTENT
+
+  &__contentMiddle {
+    padding: 10px;
+    margin-left: 220px;
+    flex: 0.4;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    &__top {
+        flex: 0.5;
+        display: flex;
+        gap: 10px;
+        justify-content: space-around;
+        align-items: center;
+
+      .image-card {
+        width: 120px;
+        height: 200px;
+        border-radius: 20px;
+        position: relative;
+        z-index: 0;
+
+
+        &:hover {
+          img.bg {
+            transform: scale(1.06);
+          }
+        }
+
+        span {
+          font-size: 15px;
+          font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
+          line-height: 1.2;
+          position: absolute;
+          bottom: 10px;
+          left: 5px;
+          color: white;
+          font-weight: 600;
+          padding: 5px;
+        }
+
+        img.bg {
+          max-width: 100%;
+          object-fit: cover;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          border-radius: 20px;
+          transition: all 0.3s ease;
+          cursor: pointer;
+        }
+
+        img.avatar {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          color: white;
+          z-index: 99;
+          position: absolute;
+          top: 10px;
+          left: 10px;
+        }
+
+      }
+    }
+
+
+
+
+  }
+
+  // BODY FEED
+  &__feedRight {
+    flex: 0.4;
+    position: relative;
+    align-self: flex-start;
+
+    #inside {
+      display: flex;
+      //flex-direction: column;
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      overflow-y: scroll;
+      overflow-x: hidden;
+    }
+  }
+
+.example-card {
+    min-width: 100%;
+    margin: 40px;
+
+}
+.cards {
+    width: 400px;
+}
+
+
+    position: absolute;
+
+    //BODY SIDEBAR
+  
+    &__sidebarLeft {
+      position: absolute;
+  
+      .inside {
+        position: absolute;
+        padding: 15px;
+  
+        margin-top: 5px;
+        width: 350px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+  
+        .user-avatar {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+  
+          span.name {
+            font-size: 16px;
+          }
+        }
+  
+      
+      }
+  
+  
+    }
+    }::-webkit-scrollbar {
+        width: 6px;
+      }
+    ::-webkit-scrollbar-thumb {
+        background: #666;
+        border-radius: 20px;
+      }
+      
+     ::-webkit-scrollbar-track {
+        background: #ddd;
+        border-radius: 20px;
+      }
+
+    #im{
+        max-height: 100% !important ;
+       max-width: 100% !important ;
+        border-radius: 20px;
+        position: fixed;
+        background-color: #1877F2;
+        overflow: hidden;
+        background: repeat;
+
+
+    }
+
+
+
+    #cover{
+        max-width: 100%;
+        max-height: 100%;
+        width:150px;
+	height:150px;
+        border-radius: 20px;
+        background-size: cover;
+
+
+    }
+    #card{
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        max-height: 700px;
+        width: 250px; //lena tsagher post
+        div {
+            
+            height: 70px;
+            display: flex;
+            gap: 20px;
+            font-size: 16px;
+            align-items: center;
+    
+            mat-icon {
+              color: #1877F2;
+              font-size: xx-large;
+              width: fit-content;
+              height: fit-content;
+            }
+    
+            mat-icon.see-more {
+              color: #828890 !important;
+              padding: 5px;
+              border-radius: 50%;
+              background-color: #E4E6EB;
+            }
+    
+            &:last-of-type {
+              border-bottom: 1px solid lightgray;
+              padding-bottom: 20px;
+            }
+    
+          }
+         
+    }::-webkit-scrollbar {
+        width: 6px;
+      }
+    ::-webkit-scrollbar-thumb {
+        background: #666;
+        border-radius: 20px;
+      }
+      
+     ::-webkit-scrollbar-track {
+        background: #ddd;
+        border-radius: 20px;
+      }
+
+    
+      @media  (max-width: 975px) {
+        .cardee {
+            display: none;
+        }
+      }
+   
+
+     
+
+    .white-icon {
+        color: rgb(255, 2, 2);
+    }
+
+#image-card {
+        max-width: 8rem;
+        height: 11rem;
+        border-radius: 20px;
+        position: fixed;
+
+        box-shadow: #000000;
+      }
+#bg{
+    max-width: 8rem;
+    height: 11rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 20px;
+        }
+
+       
+#cardt{
+
+  float:right;
+ max-height: 700px;
+width: 20%;
+overflow-y:auto;
+
+
+/*   border: 3px solid green; 
+ */
+
+}
+#cardt::-webkit-scrollbar {
+  width: 3px;
+  /* remove scrollbar space /
+  background: transparent; / optional: just make scrollbar invisible /
+  }
+  / optional: show position indicator in red */
+  ::-webkit-scrollbar-thumb {
+  background: #FF0000;
+  }
+}
+
+.img-xs {
+  width: 37px;
+  height: 37px;
+}
+.rounded {
+  border-radius: 0.25rem !important;
+}
+#cards {
+ 
+ min-height: 0;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: rgb(116, 89, 89);
+  background-clip: border-box;
+  border: 0 solid transparent;
+  border-radius: .25rem;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+}
